@@ -38,3 +38,38 @@ class_names[train_labels[1]+1]
 
 train_images <- train_images / 255
 test_images <- test_images /255
+
+val_indices <- 1:5000
+val_images <- train_images[val_indices, ,]
+part_train_images <- train_images[-val_indices , , ]
+val_labels <- train_labels[val_indices]
+part_train_lables <- train_labels[-val_indices] 
+
+model <- keras_model_sequential()
+model %>% 
+  layer_flatten(input_shape= c(28,28)) %>%
+  layer_dense(units = 128 , activation = 'relu') %>%
+  layer_dense(units = 10 , activation= 'softmax')
+
+model %>% compile(
+  optimizer = 'sgd',
+  loss = 'sparse_categorical_crossentropy',
+  metrics = c('accuracy')
+)
+
+
+  
+  
+  
+  
+  
+  
+
+  
+
+
+
+
+
+
+
